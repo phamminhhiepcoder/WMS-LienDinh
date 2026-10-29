@@ -12,7 +12,7 @@ import {
 } from 'recharts';
 
 import type { MonthlyMovement } from '../../../types/warehouseDashboard';
-import { formatTooltip } from '../../../utils/format';
+import { formatNumber, formatTooltip } from '../../../utils/format';
 import { adminStyles } from '../../../utils/styles';
 
 interface ImportExportChartProps {
@@ -58,19 +58,27 @@ export default function ImportExportChart({
 
                         <XAxis
                             dataKey="month"
-                            tick={{ fontSize: 12 }}
+                            tick={{
+                                fontSize: 12,
+                                fill: '#94A3B8',
+                                fontWeight: 500,
+                            }}
                             axisLine={false}
                             tickLine={false}
+                            tickMargin={10}
                         />
 
                         <YAxis
-                            tick={{ fontSize: 11 }}
+                            tick={{
+                                fontSize: 12,
+                                fill: '#94A3B8',
+                                fontWeight: 500,
+                            }}
                             axisLine={false}
                             tickLine={false}
+                            tickMargin={8}
                             tickFormatter={(value: number) =>
-                                new Intl.NumberFormat('vi-VN', {
-                                    notation: 'compact',
-                                }).format(value)
+                                formatNumber(value)
                             }
                         />
 
@@ -80,7 +88,7 @@ export default function ImportExportChart({
                             }
                             contentStyle={{
                                 borderRadius: 12,
-                                border: '1px solid #E2E8F0',
+                                border: '1px solid #94A3B8',
                                 fontSize: 12,
                             }}
                         />

@@ -81,15 +81,28 @@ export default function NetFlowChart({
 
                             <XAxis
                                 dataKey="month"
-                                tick={{ fontSize: 12 }}
-                                axisLine={false}
+                                tick={{
+                                    fontSize: 12,
+                                    fill: '#94A3B8',
+                                    fontWeight: 500,
+                                }}
+                                axisLine={{
+                                    stroke: '#94A3B8',
+                                    strokeOpacity: 0.5,
+                                }}
                                 tickLine={false}
+                                tickMargin={10}
                             />
 
                             <YAxis
-                                tick={{ fontSize: 11 }}
+                                tick={{
+                                    fontSize: 12,
+                                    fill: '#94A3B8',
+                                    fontWeight: 500,
+                                }}
                                 axisLine={false}
                                 tickLine={false}
+                                tickMargin={8}
                             />
 
                             <Tooltip
@@ -98,8 +111,10 @@ export default function NetFlowChart({
                                 }
                                 contentStyle={{
                                     borderRadius: 12,
-                                    border: '1px solid #E2E8F0',
+                                    border: '1px solid #94A3B8',
                                     fontSize: 12,
+                                    backgroundColor: 'var(--tooltip-bg, #FFFFFF)',
+                                    color: '#94A3B8',
                                 }}
                             />
 

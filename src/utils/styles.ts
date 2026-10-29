@@ -11,13 +11,17 @@ export const adminStyles = {
   // Thẻ chỉ số
   statCard: [
     'p-5 sm:p-6',
+    'rounded-2xl',
+    'border border-slate-200 dark:border-slate-700',
     'shadow-sm hover:shadow-md',
+    'hover:border-slate-300 dark:hover:border-slate-500',
     'transition-all duration-300',
   ].join(' '),
 
   // Khung chứa chart, nội dung
   section: [
     'p-5 sm:p-6',
+    'border border-slate-200 dark:border-slate-700',
     'shadow-sm min-w-0',
   ].join(' '),
 
@@ -50,17 +54,6 @@ export const adminStyles = {
     'transition-colors duration-300',
   ].join(' '),
 
-  // Ô nhập
-  input: [
-    'w-full rounded-xl border',
-    'border-slate-200 dark:border-slate-700',
-    'bg-white dark:bg-slate-800',
-    'text-slate-900 dark:text-white',
-    'placeholder:text-slate-400 dark:placeholder:text-slate-500',
-    'focus:outline-none focus:ring-2 focus:ring-purple-500/30',
-    'focus:border-purple-500',
-    'transition-colors duration-200',
-  ].join(' '),
 
   // Nút
   secondaryButton: [
@@ -85,6 +78,18 @@ export const adminStyles = {
     'hover:bg-slate-50 dark:hover:bg-slate-800/60',
     'transition-colors duration-200',
   ].join(' '),
+
+  // Components của form dùng chung
+  inputClass: [
+    'w-full rounded-xl border px-4 py-2.5 text-sm font-semibold outline-none',
+    'border-slate-200 bg-white text-slate-800 placeholder:text-slate-400',
+    'focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10',
+    'dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100',
+    'dark:placeholder:text-slate-500',
+  ].join(' '),
+
+  labelClass: 'mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400'
+
 };
 
 
@@ -344,5 +349,7 @@ export const getAdminTheme = (isDark: boolean) => ({
     isDark
       ? 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'
       : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100',
-  ].join(' ')
+  ].join(' '),
+
+
 });

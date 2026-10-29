@@ -122,7 +122,7 @@ export default function AdminHeader({
                         onChange={(event) => setSearchQuery(event.target.value)}
                         placeholder={t('search')}
                         aria-label={t('search')}
-                        className={`${adminStyles.input} h-10 w-full min-w-0 pl-9 pr-3 text-sm`}
+                        className={`${adminStyles.inputClass} h-10 w-full min-w-0 pl-9 pr-3 text-sm`}
                     />
                 </form>
 
