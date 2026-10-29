@@ -1,4 +1,7 @@
+import type { BrandColor } from '../types/brand';
 import type { DashboardData } from '../types/warehouseDashboard';
+
+
 
 export const initialData: DashboardData = {
     summary: {
@@ -30,4 +33,62 @@ export const initialData: DashboardData = {
         { name: 'Hàng lỗi', quantity: 320 },
         { name: 'Hàng đạt chuẩn', quantity: 18430 },
     ],
+
+    productionData: [
+        { date: '29 thg 7', value: 45000 },
+        { date: '1 thg 8', value: 85000 },
+        { date: '5 thg 8', value: 60000 },
+        { date: '8 thg 8', value: 75000 },
+        { date: '12 thg 8', value: 82000 },
+        { date: '15 thg 8', value: 95000 },
+        { date: '19 thg 8', value: 88000 },
+        { date: '22 thg 8', value: 70000 },
+        { date: '26 thg 8', value: 42000 },
+        { date: '29 thg 8', value: 35000 },
+        { date: '5 thg 9', value: 55000 },
+        { date: '9 thg 9', value: 15000 },
+        { date: '14 thg 9', value: 5000 },
+    ],
+    brands: [
+        {
+            name: 'UGG',
+            value: 12500,
+            color: 'blue',
+        },
+        {
+            name: 'TEVA',
+            value: 4687,
+            color: 'violet',
+        },
+        {
+            name: 'KOOLABURRA',
+            value: 3124,
+            color: 'emerald',
+        },
+    ]
+};
+
+export const colorStyles: Record<
+    BrandColor,
+    {
+        icon: string;
+        selected: string;
+        dot: string;
+    }
+> = {
+    blue: {
+        icon: 'bg-blue-500/10 text-blue-600 dark:text-blue-400',
+        selected: 'border-blue-500 ring-2 ring-blue-500/10',
+        dot: 'bg-blue-500',
+    },
+    violet: {
+        icon: 'bg-violet-500/10 text-violet-600 dark:text-violet-400',
+        selected: 'border-violet-500 ring-2 ring-violet-500/10',
+        dot: 'bg-violet-500',
+    },
+    emerald: {
+        icon: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
+        selected: 'border-emerald-500 ring-2 ring-emerald-500/10',
+        dot: 'bg-emerald-500',
+    },
 };

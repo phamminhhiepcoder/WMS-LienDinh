@@ -100,7 +100,7 @@ export default function AdminLayout() {
       )}
 
       <main
-        className={`flex min-h-0 min-w-0 flex-1 flex-col transition-colors duration-300 ${theme.main}`}
+        className={`flex min-w-0 flex-1 flex-col ${theme.main}`}
       >
         <AdminHeader
           title={currentTitle}

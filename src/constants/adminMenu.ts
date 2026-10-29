@@ -13,6 +13,14 @@ import {
     Link2,
     Clock3,
     PackageSearch,
+    BuildingComplex,
+    Warehouse,
+    Tags,
+    Package,
+    ArrowLeftRight,
+    AlertTriangle,
+    PackageX,
+    Factory,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 
@@ -42,18 +50,18 @@ export const adminMenuSections: AdminMenuSection[] = [
                 icon: Boxes,
                 children: [
                     {
-                        labelKey: 'inventoryTransactionHistory',
-                        icon: History,
-                        path: '/admin/inventory',
+                        labelKey: 'brands',
+                        icon: Tags,
+                        path: '/admin/brands',
                     },
                     {
-                        labelKey: 'importReceipts',
-                        icon: PackagePlus,
+                        labelKey: 'suppliers',
+                        icon: Truck,
                         path: '/admin/inventory/imports',
                     },
                     {
-                        labelKey: 'packingInformation',
-                        icon: PackageCheck,
+                        labelKey: 'warehouses',
+                        icon: Warehouse,
                         path: '/admin/inventory/packing',
                     },
                 ],
@@ -65,7 +73,7 @@ export const adminMenuSections: AdminMenuSection[] = [
                     {
                         labelKey: 'Pending',
                         icon: Clock3,
-                        path: '/admin/inventory',
+                        path: '/admin/rfid',
                     }
                 ],
             },
@@ -75,10 +83,35 @@ export const adminMenuSections: AdminMenuSection[] = [
                 path: '/admin/reports',
                 children: [
                     {
-                        labelKey: 'Report Pending',
+                        labelKey: 'inventoryReport',
+                        icon: Package,
+                        path: '/admin/reports/inventory',
+                    },
+                    {
+                        labelKey: 'importExportReport',
+                        icon: ArrowLeftRight,
+                        path: '/admin/reports/import-export',
+                    },
+                    {
+                        labelKey: 'stockMovementReport',
                         icon: History,
-                        path: '/admin/inventory',
-                    }
+                        path: '/admin/reports/stock-movement',
+                    },
+                    {
+                        labelKey: 'lowStockReport',
+                        icon: AlertTriangle,
+                        path: '/admin/reports/low-stock',
+                    },
+                    {
+                        labelKey: 'defectiveStockReport',
+                        icon: PackageX,
+                        path: '/admin/reports/defective-stock',
+                    },
+                    {
+                        labelKey: 'productionReport',
+                        icon: Factory,
+                        path: '/admin/reports/production',
+                    },
                 ],
             },
             {
@@ -132,6 +165,15 @@ export const adminMenuSections: AdminMenuSection[] = [
                 icon: Activity,
                 path: '/admin/monitoring',
             }
+        ],
+    },
+    {
+        titleKey: '',
+        items: [
+            {
+                labelKey: 'lienDinh',
+                icon: BuildingComplex,
+            },
         ],
     },
 ];

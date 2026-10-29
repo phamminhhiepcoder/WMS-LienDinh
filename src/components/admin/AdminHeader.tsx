@@ -9,7 +9,6 @@ import {
     ZoomOut,
     Languages,
     Check,
-    X,
     Menu,
 } from 'lucide-react';
 

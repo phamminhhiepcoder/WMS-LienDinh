@@ -1,3 +1,5 @@
+import type { Brand } from "./brand";
+
 export interface WarehouseSummary {
   totalImport: number;
   totalExport: number;
@@ -21,9 +23,16 @@ export interface DefectiveStock {
   quantity: number;
 }
 
+export interface ProductionData {
+  date: string;
+  value: number;
+}
+
 export interface DashboardData {
   summary: WarehouseSummary;
   monthlyMovement: MonthlyMovement[];
   netFlow: NetFlow[];
   defectiveStock: DefectiveStock[];
+  productionData: ProductionData[];
+  brands: Brand[];
 }

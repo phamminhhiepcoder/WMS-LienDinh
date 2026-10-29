@@ -160,4 +160,23 @@ export const getAdminTheme = (isDark: boolean) => ({
       ? 'text-slate-200 hover:bg-slate-800'
       : 'text-slate-700 hover:bg-slate-50',
   ].join(' '),
+  sidebarBrandCard: [
+    'flex items-center gap-3 rounded-xl border p-3',
+    'transition-colors duration-300',
+    isDark
+      ? 'border-slate-700 bg-slate-900'
+      : 'border-slate-200 bg-white shadow-sm',
+  ].join(' '),
+
+  sidebarBrandIcon: [
+    'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl',
+    isDark
+      ? 'bg-blue-500/15 text-blue-400'
+      : 'bg-blue-50 text-blue-600',
+  ].join(' '),
+
+  sidebarBrandName: [
+    'truncate text-sm font-bold',
+    isDark ? 'text-white' : 'text-slate-800',
+  ].join(' '),
 });

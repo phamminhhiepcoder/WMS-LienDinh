@@ -4,7 +4,6 @@ import { ChevronDown } from 'lucide-react';
 import { adminMenuSections } from '../../constants/adminMenu';
 import type { AdminMenuItem } from '../../constants/adminMenu';
 import { getAdminTheme } from '../../utils/styles';
-import AdminFooter from './AdminFooter';
 import { useTranslation } from 'react-i18next';
 
 interface AdminSidebarProps {
@@ -14,7 +13,6 @@ interface AdminSidebarProps {
 
 export default function AdminSidebar({
     darkMode,
-    onLogout,
 }: AdminSidebarProps) {
     const location = useLocation();
     const theme = getAdminTheme(darkMode);
@@ -72,8 +70,8 @@ export default function AdminSidebar({
                             to={child.path ?? '/admin'}
                             aria-current={active ? 'page' : undefined}
                             className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${active
-                                    ? 'bg-purple-600/10 text-purple-600 dark:bg-purple-500/15 dark:text-purple-300'
-                                    : `${theme.secondary} ${theme.hover}`
+                                ? 'bg-purple-600/10 text-purple-600 dark:bg-purple-500/15 dark:text-purple-300'
+                                : `${theme.secondary} ${theme.hover}`
                                 }`}
                         >
                             <ChildIcon className="h-4 w-4 shrink-0" />
@@ -109,14 +107,21 @@ export default function AdminSidebar({
 
             <nav
                 aria-label={t('adminMenu')}
-                className="flex-1 space-y-25 overflow-y-auto px-4 py-6"
+                className="flex-1 space-y-10 overflow-y-auto px-4 py-6"
             >
-                {adminMenuSections.map((section) => (
-                    <section key={section.titleKey}>
+                {adminMenuSections.map((section, index) => (
+                    <section
+                        key={section.titleKey}
+                        className={
+                            index < adminMenuSections.length - 1
+                                ? `border-b pb-6 ${theme.divider}`
+                                : ''
+                        }
+                    >
                         <h2
                             className={`mb-3 px-4 text-[10px] font-bold uppercase tracking-[0.16em] ${darkMode
-                                    ? 'text-slate-500'
-                                    : 'text-slate-400'
+                                ? 'text-slate-500'
+                                : 'text-slate-400'
                                 }`}
                         >
                             {t(section.titleKey)}
@@ -147,17 +152,17 @@ export default function AdminSidebar({
                                                 }
                                                 aria-expanded={isOpen}
                                                 className={`flex w-full items-center justify-between gap-3.5 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 ${hasActiveChild
-                                                        ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
-                                                        : `${theme.secondary} ${theme.hover}`
+                                                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
+                                                    : `${theme.secondary} ${theme.hover}`
                                                     }`}
                                             >
                                                 <span className="flex min-w-0 items-center gap-3.5">
                                                     <Icon
                                                         className={`h-5 w-5 shrink-0 ${hasActiveChild
-                                                                ? 'text-white'
-                                                                : darkMode
-                                                                    ? 'text-slate-400'
-                                                                    : 'text-slate-500'
+                                                            ? 'text-white'
+                                                            : darkMode
+                                                                ? 'text-slate-400'
+                                                                : 'text-slate-500'
                                                             }`}
                                                     />
                                                     <span>
@@ -167,8 +172,8 @@ export default function AdminSidebar({
 
                                                 <ChevronDown
                                                     className={`h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen
-                                                            ? 'rotate-180'
-                                                            : ''
+                                                        ? 'rotate-180'
+                                                        : ''
                                                         }`}
                                                 />
                                             </button>
@@ -179,16 +184,16 @@ export default function AdminSidebar({
                                                     isActive ? 'page' : undefined
                                                 }
                                                 className={`flex items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 ${isActive
-                                                        ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
-                                                        : `${theme.secondary} ${theme.hover}`
+                                                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
+                                                    : `${theme.secondary} ${theme.hover}`
                                                     }`}
                                             >
                                                 <Icon
                                                     className={`h-5 w-5 shrink-0 ${isActive
-                                                            ? 'text-white'
-                                                            : darkMode
-                                                                ? 'text-slate-400'
-                                                                : 'text-slate-500'
+                                                        ? 'text-white'
+                                                        : darkMode
+                                                            ? 'text-slate-400'
+                                                            : 'text-slate-500'
                                                         }`}
                                                 />
                                                 <span>
@@ -207,11 +212,6 @@ export default function AdminSidebar({
                     </section>
                 ))}
             </nav>
-
-            <AdminFooter
-                darkMode={darkMode}
-                onLogout={onLogout}
-            />
         </aside>
     );
 }

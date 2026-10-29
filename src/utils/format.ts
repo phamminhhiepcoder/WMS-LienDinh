@@ -1,4 +1,6 @@
 // util format tiền Việt
-export const formatPrice = (price: number): string => {
-  return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
-};
+export const formatNumber = (value: number) =>
+  new Intl.NumberFormat("vi-VN").format(value);
+
+export const formatTooltip = (value: number | string) =>
+  `${formatNumber(Number(value))} sản phẩm`;
