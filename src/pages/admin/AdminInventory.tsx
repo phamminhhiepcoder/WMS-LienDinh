@@ -1,4 +1,4 @@
-export default function AdminWarehouses() {
+export default function AdminInventory() {
   return (
     <div className="flex min-h-[300px] items-center justify-center">
       <div className="text-center">

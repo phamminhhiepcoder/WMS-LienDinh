@@ -66,7 +66,7 @@ export default function Login() {
             Chào mừng trở lại!
           </h2>
           <p className="mt-2 text-center text-sm font-medium text-slate-500">
-            Đăng nhập tài khoản WMS-DinhVang của bạn
+            Đăng nhập tài khoản WMS của bạn
           </p>
         </div>
 

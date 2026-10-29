@@ -8,9 +8,9 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import ScrollToTop from './components/common/ScrollToTop';
 import { AuthProvider } from './contexts/AuthContext';
 import AdminProducts from './pages/admin/AdminProducts';
-import AdminWarehouses from './pages/admin/AdminWarehouses';
 import AdminSuppliers from './pages/admin/AdminSuppliers';
 import AdminSettings from './pages/admin/AdminSettings';
+import AdminInventory from './pages/admin/AdminInventory';
 
 function AppContent() {
   return (
@@ -25,7 +25,7 @@ function AppContent() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminDashboard />} />
               <Route path="products" element={<AdminProducts />} />
-              <Route path="warehouses" element={<AdminWarehouses />} />
+              <Route path="inventory" element={<AdminInventory />} />
               <Route path="suppliers" element={<AdminSuppliers />} />
               <Route path="settings" element={<AdminSettings />} />
             </Route>
