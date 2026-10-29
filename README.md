@@ -35,19 +35,18 @@ Welcome to WMS-LienDinh, a Warehouse Management System (WMS) Dashboard built wit
 
 ## Features
 
-| Feature                          | Description                                                                  |
-|----------------------------------|------------------------------------------------------------------------------|
-| Warehouse Dashboard              | Monitor key warehouse performance indicators and inventory statistics        |
-| Inbound Management               | Track goods received into the warehouse                                     |
-| Outbound Management              | Monitor goods dispatched from the warehouse                                  |
-| Inventory Monitoring             | View current stock levels and inventory availability                         |
-| Monthly Inbound/Outbound Analytics | Visualize monthly warehouse receiving and dispatch activities              |
-| Net Stock Flow                   | Analyze the difference between inbound and outbound quantities               |
-| Defective Inventory Tracking     | Monitor defective stock and identify inventory quality issues               |
-| Inventory Turnover               | Display inventory turnover indicators to support warehouse performance      |
-| Responsive Interface             | Provide an optimized experience across desktop, tablet, and mobile devices   |
-| Interactive Charts               | Visualize warehouse data using Chart.js and mock datasets                   |
-
+| Feature | Description |
+| :--- | :--- |
+| **Warehouse Dashboard** | Monitor key warehouse performance indicators and inventory statistics. |
+| **Inventory Monitoring** | View current stock levels and inventory availability in real-time. |
+| **Monthly Import/Export Analytics** | Visualize monthly warehouse receiving and dispatch activities through charts. |
+| **Net Stock Flow** | Analyze the net difference between inbound and outbound quantities over time. |
+| **Defective Inventory Tracking** | Monitor defective stock proportions and identify inventory quality issues. |
+| **Finished Product Volume Overview** | Track production output across multiple brand categories with timeline filters. |
+| **Responsive Interface** | Provide an optimized user experience across desktop, tablet, and mobile devices. |
+| **Interactive Charts** | Visualize warehouse data dynamically using Recharts and mock datasets. |
+| **Multi-Language Support (ENG/VI)** | Seamlessly switch between English and Vietnamese using `react-i18next`. |
+| **Dark Mode Support** | Toggle between light and dark themes with custom admin styling utilities. |
 
 ## Dependencies and Libraries
 
