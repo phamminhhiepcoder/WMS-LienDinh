@@ -6,9 +6,9 @@ Welcome to WMS-LienDinh, a Warehouse Management System (WMS) Dashboard built wit
 
 ## Dummy User Accounts
 
-| Email (Normal User) | Password |
+| Email (Admin) | Password |
 | ------------------- | -------- |
-| admin@gmail.com     | admin123 |
+| admin@wms.com     | admin123 |
 
 ## Tech Stack
 
