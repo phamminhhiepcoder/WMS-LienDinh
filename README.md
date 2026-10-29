@@ -6,9 +6,9 @@ Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built wit
 
 ## Dummy User Accounts
 
-| Email (Normal User) | Password | Email (Admin)     | Password  |
-| ------------------- | -------- | ----------------- | --------- |
-| admin@gmail.com     | admin123 | admin@gmail.com   | admin123 |
+| Email (Normal User) | Password |
+| ------------------- | -------- |
+| admin@gmail.com     | admin123 |
 
 ## Tech Stack
 
@@ -26,13 +26,8 @@ Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built wit
     ```bash
     npm install
     ```
-3.  Create a `.env` file inside the project folder and add the following:
 
-    ````bash
-    PORT = 5000
-    ````
-
-4.  Run the app:
+3.  Run the app:
 
     ```bash
     npm run dev
@@ -56,93 +51,66 @@ Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built wit
 
 ## Dependencies and Libraries
 
-| Dependency                  | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| @emotion/react              | Emotion library for writing CSS with JavaScript              |
-| @emotion/styled             | Styled components using Emotion                              |
-| @material-ui/core           | UI components library for Material Design                    |
-| @material-ui/data-grid      | Data grid component for Material-UI                          |
-| @material-ui/icons          | Material Design icons for React components                   |
-| @material-ui/lab            | Additional components and utilities for Material-UI          |
-| @mui/icons-material         | Material-UI icons for MUI components                         |
-| @mui/material               | Material-UI components library                               |
-| @mui/styles                 | Styling solution for Material-UI components                  |
-| @stripe/react-stripe-js     | React components for Stripe's client-side JavaScript library |
-| @stripe/stripe-js           | Stripe's client-side JavaScript library                      |
-| @testing-library/user-event | Utilities for simulating events with Testing Library         |
-| axios                       | Promise-based HTTP client for the browser and Node.js        |
-| highcharts                  | Interactive JavaScript charting library                      |
-| highcharts-react-official   | React wrapper for Highcharts library                         |
-| node-sass                   | Sass compiler for Node.js                                    |
-| react                       | JavaScript library for building user interfaces              |
-| react-alert                 | React component for customizable alerts                      |
-| react-alert-template-basic  | Basic template for react-alert                               |
-| react-dom                   | Entry point to the React DOM library                         |
-| react-helmet                | Manage document head in React                                |
-| react-js-pagination         | Pagination component for React                               |
-| react-material-ui-carousel  | Carousel component for Material-UI                           |
-| react-redux                 | State management library for React                           |
-| react-router-dom            | Routing library for React applications                       |
-| react-scripts               | Create React apps with no build configuration                |
-| redux                       | Predictable state container for JavaScript apps              |
-| redux-devtools-extension    | Redux DevTools integration                                   |
-| redux-thunk                 | Thunk middleware for Redux                                   |
-| styled-components           | CSS-in-JS library for styling React components               |
-| swiper                      | Mobile touch slider library                                  |
-| web-vitals                  | Library for measuring web performance metrics                |
+### Production Dependencies
+
+| Dependency | Description |
+| :--- | :--- |
+| **@tailwindcss/vite** | Official Vite plugin for Tailwind CSS v4 |
+| **i18next** | Internationalization framework for JavaScript |
+| **lucide-react** | Clean and lightweight Lucide icon set for React components |
+| **react** | JavaScript library for building user interfaces |
+| **react-dom** | Entry point to the React DOM library |
+| **react-i18next** | React bindings and hooks for i18next internationalization |
+| **react-router-dom** | Declarative routing library for React web applications |
+| **recharts** | Redefined chart library built with React and D3 |
+| **tailwindcss** | Utility-first CSS framework for rapid UI development |
+
+---
+
+### Development Dependencies (devDependencies)
+
+| Dependency | Description |
+| :--- | :--- |
+| **@types/node** | TypeScript definitions for Node.js |
+| **@types/react** | TypeScript definitions for React |
+| **@types/react-dom** | TypeScript definitions for React DOM |
+| **@vitejs/plugin-react** | Official Vite plugin providing React support |
+| **oxlint** | High-performance JavaScript/TypeScript linter |
+| **typescript** | Strongly typed programming language that builds on JavaScript |
+| **vite** | Next-generation frontend tooling and development server |
 
 ## Screenshots
+<img width="1875" height="899" alt="image" src="https://github.com/user-attachments/assets/b61928c9-7ef2-4fbd-80c5-a9c52aa1a9cd" />
+<img width="1609" height="831" alt="image" src="https://github.com/user-attachments/assets/653ddcc1-c2c0-44c9-857d-0c2a31c2a7f6" />
+<img width="1587" height="490" alt="image" src="https://github.com/user-attachments/assets/95ebf09f-50cd-4875-9ca0-36985faacf2d" />
+<img width="1859" height="906" alt="image" src="https://github.com/user-attachments/assets/3a96a9bc-0600-41b5-adb0-7b7b34d31667" />
+<img width="544" height="837" alt="image" src="https://github.com/user-attachments/assets/3efd3ad3-0e61-44ff-bc0c-f83f2afb9fe0" />
 
 ## Hosting Your Complete App on Vercel
 
-This guide will walk you through the process of hosting your complete MERN stack app on Vercel using the `vercel.json` configuration.
+This guide explains how to deploy the WMS-DinhVang React application to Vercel. Since the project only contains a frontend and does not require a backend, Vercel can host the entire application as a static website.
 
 ### Step 1: Prepare Your Project
 
-- Organize your project with a root directory that contains both frontend and backend folders.
-- Ensure both backend and frontend directories have all necessary code and dependencies.
-- Create a `vercel.json` file in the root directory.
-- Add the following code to `vercel.json`:
+- Ensure the React project contains all necessary source code, dependencies, and configuration files.
+- Verify that the project includes a package.json file with the required scripts.
+- Ensure the application runs correctly in your local environment.
 
-  ```json
-  {
-    "version": 2,
-    "builds": [
-      {
-        "src": "./backend/server.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "./frotend/build",
-        "use": "@vercel/static"
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/backend/server.js"
-      }
-    ]
-  }
-  ```
+Run the following commands in the project directory to install dependencies and build the application:
 
-  - Note :
-    - Using this configuration will require you to run npm run build in the WMS-DinhVang directory before deploying to Vercel.
-    - Ensure your folder structure looks like this:
-      ```json
-        WMS-DinhVang
-        │   node_modules
-        │   package.json
-        │   build
-        │   └── ...
-        node_modules
-        package.json
-        vercel.json
-      ```
+```bash
+npm install
+npm run build
+```
+
+After the build completes, the production files will be generated in the build directory for Create React App or the dist directory for Vite.
 
 ### Step 2: Push Code to GitHub
 
-- Push all your code to GitHub, ignoring the `node_modules` folder and `.env` file.
+- Push the React project code to a GitHub repository.
+- Ensure that the node_modules directory and unnecessary generated files are excluded using .gitignore.
+- Do not upload sensitive environment files or credentials to GitHub.
+- Verify that all required source code and configuration files are included in the repository.
 
 ### Step 3: Create a Vercel Account
 
@@ -156,25 +124,29 @@ This guide will walk you through the process of hosting your complete MERN stack
 
 ### Step 5: Configure Project Settings
 
-- Configure the project settings:
-  - Keep the settings as they are.
-  - Add all your `.env` variables in the Environment Variables section.
+Configure the project settings according to the React build tool:
+
+- Framework Preset: Select React or Vite, depending on the project setup.
+- Build Command: npm run build.
+- Output Directory: build for Create React App or dist for Vite.
+- Install Command: npm install.
 
 ### Step 6: Deploy Your App
 
-- Click on "Deploy" and wait for a few minutes for the deployment process to complete.
+- Click Deploy to start the deployment process.
+- Vercel will install the dependencies, build the React application, and publish the generated static files.
+- Wait for the deployment to finish.
+- If the build fails, review the deployment logs and check the build command, output directory, and dependencies.
 
 ### Step 7: Visit Your App
 
-- Once the deployment is successful, click on "Visit" to access your live app.
+- Once deployment is successful, click Visit to open the website.
+- Test the main pages, navigation, buttons, and interactive components.
+- Verify that images, stylesheets, and JavaScript files load correctly.
+- Check that the website displays properly on different screen sizes and browsers.
 
 ### Step 8: Enjoy Your App
 
 - Congratulations! Your app is now live and accessible.
 
-## Contributions
-
-| Contributor                                           |
-| ----------------------------------------------------- |
-| [phamminhhiepcoder](https://github.com/phamminhhiepcoder)             |
 

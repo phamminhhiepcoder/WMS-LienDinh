@@ -59,7 +59,7 @@ export default function ProductionOverview({
                                 Tổng quan sản lượng thành phẩm
                             </h2>
                             <p className={`mt-1 text-xs ${adminStyles.mutedText}`}>
-                                Theo dõi sản lượng theo thương hiệu và thời gian.
+                                Theo dõi sản lượng theo nhãn hàng và thời gian.
                             </p>
                         </div>
                     </div>
@@ -132,7 +132,7 @@ export default function ProductionOverview({
                             Sản lượng theo thời gian
                         </h3>
                         <p className={`mt-1 text-xs ${adminStyles.mutedText}`}>
-                            Thương hiệu đang chọn: {selectedBrand}
+                            Nhãn hàng đang chọn: {selectedBrand}
                         </p>
                     </div>
 

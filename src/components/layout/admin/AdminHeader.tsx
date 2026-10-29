@@ -101,7 +101,7 @@ export default function AdminHeader({
             </button>
 
             <h2
-                className={`hidden 2xl:block shrink-0 max-w-48 truncate text-sm font-extrabold tracking-tight ${adminStyles.title}`}
+                className={`hidden 2xl:block shrink-0 max-w-48 truncate text-lg font-extrabold tracking-tight ${adminStyles.title}`}
             >
                 {title}
             </h2>
