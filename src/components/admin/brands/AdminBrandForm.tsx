@@ -29,8 +29,8 @@ export default function AdminBrandForm({
     const [description, setDescription] = useState('');
     const [logo, setLogo] = useState('');
     const [isActive, setIsActive] = useState(true);
-    const [isSaving, setIsSaving] = useState(false);
-    const [isUploading, setIsUploading] = useState(false);
+    const [isSaving] = useState(false);
+    const [isUploading] = useState(false);
     const [uploadError, setUploadError] = useState('');
 
     const fileInputRef = useRef<HTMLInputElement>(null);

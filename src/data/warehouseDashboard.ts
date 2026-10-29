@@ -31,22 +31,7 @@ export const initialData: DashboardData = {
         { name: 'Hàng lỗi', quantity: 320 },
         { name: 'Hàng đạt chuẩn', quantity: 18430 },
     ],
-
-    productionData: [
-        { date: '29 thg 7', value: 45000 },
-        { date: '1 thg 8', value: 85000 },
-        { date: '5 thg 8', value: 60000 },
-        { date: '8 thg 8', value: 75000 },
-        { date: '12 thg 8', value: 82000 },
-        { date: '15 thg 8', value: 95000 },
-        { date: '19 thg 8', value: 88000 },
-        { date: '22 thg 8', value: 70000 },
-        { date: '26 thg 8', value: 42000 },
-        { date: '29 thg 8', value: 35000 },
-        { date: '5 thg 9', value: 55000 },
-        { date: '9 thg 9', value: 15000 },
-        { date: '14 thg 9', value: 5000 },
-    ],
+    
     brands: [
         {
             name: 'UGG',

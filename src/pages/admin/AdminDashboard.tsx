@@ -1,8 +1,4 @@
 import { useState } from "react";
-import {
-  Loader2,
-  AlertCircle,
-} from "lucide-react";
 
 import { adminStyles } from "../../utils/styles";
 import type { DashboardData } from "../../types/warehouseDashboard";
@@ -10,28 +6,9 @@ import { initialData } from "../../data/warehouseDashboard";
 import { DashboardStats, ImportExportChart, NetFlowChart, ProductionOverview } from "../../components/admin/dashboard";
 
 export default function AdminDashboard() {
-  const [data, setData] = useState<DashboardData>(initialData);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [data] = useState<DashboardData>(initialData);
 
   const { summary, monthlyMovement, netFlow, defectiveStock, brands } = data;
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center py-24">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center gap-3 p-4 rounded-2xl border border-red-200 bg-red-50 text-red-700 dark:bg-red-950/30 dark:text-red-300 dark:border-red-900">
-        <AlertCircle className="w-5 h-5 shrink-0" />
-        <span className="font-semibold">{error}</span>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-6 sm:space-y-8 text-left">
