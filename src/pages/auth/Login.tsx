@@ -1,12 +1,25 @@
-import React, { useState } from 'react';
-import { useNavigate, useLocation, Link } from 'react-router-dom';
+
+import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Eye,
+  EyeOff,
+  LockKeyhole,
+  Mail,
+  ArrowRight,
+  AlertCircle,
+  LoaderCircle,
+  ShieldCheck,
+} from 'lucide-react';
+
 import { useAuth } from '../../contexts/AuthContext';
-import { Eye, EyeOff, Lock, Mail, ArrowRight, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function Login() {
   const { login, user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -15,105 +28,167 @@ export default function Login() {
 
   const from = location.state?.from?.pathname || '/';
 
-  React.useEffect(() => {
-    if (user) {
-      if (user.role === 'admin') {
-        navigate('/admin', { replace: true });
-      } else {
-        const targetPath = from.startsWith('/admin') ? '/' : from;
-        navigate(targetPath, { replace: true });
-      }
+  useEffect(() => {
+    if (!user) return;
+
+    if (user.role === 'admin') {
+      navigate('/admin', { replace: true });
+    } else {
+      navigate(
+        from.startsWith('/admin') ? '/' : from,
+        { replace: true },
+      );
     }
   }, [user, navigate, from]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || !password) {
-      setError('Vui lòng điền đầy đủ email và mật khẩu');
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const normalizedEmail = email.trim();
+
+    if (!normalizedEmail || !password) {
+      setError('Vui lòng nhập đầy đủ email và mật khẩu.');
       return;
     }
+
     setError('');
     setIsLoading(true);
 
     try {
-      const loggedUser = await login(email, password);
+      const loggedUser = await login(normalizedEmail, password);
+
       if (loggedUser.role === 'admin') {
         navigate('/admin', { replace: true });
       } else {
-        navigate(from, { replace: true });
+        navigate(
+          from.startsWith('/admin') ? '/' : from,
+          { replace: true },
+        );
       }
-    } catch (err: any) {
-      setError(err.message || 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.');
+    } catch (err: unknown) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : 'Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin.',
+      );
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-(screen-20) flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-3xl border border-slate-100 shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-2xl -mr-16 -mt-16" />
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-rose-500/5 rounded-full blur-2xl -ml-16 -mb-16" />
+    <main className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-50 px-4 py-8 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-purple-100/70 blur-3xl" />
+        <div className="absolute -bottom-40 -right-20 h-96 w-96 rounded-full bg-violet-100/60 blur-3xl" />
 
-        <div className="relative">
-          <div className="flex justify-center mb-6">
-            <div className="w-20 h-12 bg-red-650 rounded-2xl flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-red-550/20 bg-red-600">
-              WMS
-            </div>
+        <div
+          className="absolute inset-0 opacity-[0.035]"
+          style={{
+            backgroundImage:
+              'linear-gradient(#64748b 1px, transparent 1px), linear-gradient(90deg, #64748b 1px, transparent 1px)',
+            backgroundSize: '36px 36px',
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
+        <div className="mb-7 flex flex-col items-center">
+          <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl ">
+            <img
+              src="/logo.png"
+              alt="WMS Logo"
+              className="h-full w-full object-contain"
+              onError={(event) => {
+                event.currentTarget.style.display = 'none';
+              }}
+            />
           </div>
 
-          <h2 className="text-center text-3xl font-extrabold text-slate-800 tracking-tight">
-            Chào mừng trở lại!
-          </h2>
-          <p className="mt-2 text-center text-sm font-medium text-slate-500">
-            Đăng nhập tài khoản WMS của bạn
+          <h1 className="mt-4 text-2xl font-black tracking-tight text-slate-900">
+            <span className="text-purple-600">LienDinh</span>
+          </h1>
+
+          <p className="mt-1 text-sm font-medium text-slate-500">
+            Warehouse Management System
           </p>
         </div>
 
-        {error && (
-          <div className="flex items-center gap-2 p-3 bg-red-50 text-red-600 text-sm font-semibold rounded-2xl border border-red-100 animate-in fade-in duration-200">
-            <AlertCircle className="w-4.5 h-4.5 shrink-0" />
-            <span>{error}</span>
-          </div>
-        )}
+        <section className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-xl shadow-slate-900/[0.04] sm:p-9">
+          <div className="mb-7">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-purple-50 px-3 py-1.5 text-xs font-bold text-purple-600">
+              <ShieldCheck className="h-3.5 w-3.5" />
+              SECURE ACCESS
+            </div>
 
-        <form className="mt-8 space-y-6 relative" onSubmit={handleSubmit}>
-          <div className="space-y-4">
+            <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+              Chào mừng trở lại!
+            </h2>
+
+            <p className="mt-2 text-sm leading-6 text-slate-500">
+              Đăng nhập để tiếp tục quản lý kho hàng của bạn.
+            </p>
+          </div>
+
+          {error && (
+            <div
+              role="alert"
+              className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-3.5 text-sm text-red-700"
+            >
+              <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+              <span className="leading-5">{error}</span>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="email" className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-1.5 ml-1">
-                Địa chỉ Email
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-bold text-slate-700"
+              >
+                Địa chỉ email
               </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-slate-400" />
-                </div>
+
+              <div className="group relative">
+                <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-purple-600" />
+
                 <input
                   id="email"
                   name="email"
                   type="email"
-                  autoComplete="email"
+                  autoComplete="username"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    if (error) setError('');
+                  }}
                   placeholder="name@example.com"
-                  className="block w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl focus:bg-white focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-hidden transition-all duration-200 text-sm font-medium"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-11 pr-4 text-sm font-medium text-slate-800 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 hover:border-slate-300 focus:border-purple-500 focus:bg-white focus:ring-4 focus:ring-purple-500/10"
                 />
               </div>
             </div>
 
             <div>
-              <div className="flex items-center justify-between mb-1.5 ml-1">
-                <label htmlFor="password" className="block text-xs font-bold text-slate-500 uppercase tracking-wider">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <label
+                  htmlFor="password"
+                  className="text-sm font-bold text-slate-700"
+                >
                   Mật khẩu
                 </label>
-                <Link to="/forgot-password" className="text-xs font-bold text-red-600 hover:text-red-700 transition-colors">
+
+                <Link
+                  to="/forgot-password"
+                  className="text-xs font-bold text-purple-600 transition-colors hover:text-purple-700 hover:underline"
+                >
                   Quên mật khẩu?
                 </Link>
               </div>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-slate-400" />
-                </div>
+
+              <div className="group relative">
+                <LockKeyhole className="pointer-events-none absolute left-3.5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400 transition-colors group-focus-within:text-purple-600" />
+
                 <input
                   id="password"
                   name="password"
@@ -121,47 +196,93 @@ export default function Login() {
                   autoComplete="current-password"
                   required
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="block w-full pl-11 pr-12 py-3 bg-slate-50 border border-slate-200 text-slate-800 rounded-2xl focus:bg-white focus:border-red-500 focus:ring-1 focus:ring-red-500 outline-hidden transition-all duration-200 text-sm font-medium"
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                    if (error) setError('');
+                  }}
+                  placeholder="Nhập mật khẩu"
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3.5 pl-11 pr-12 text-sm font-medium text-slate-800 outline-none transition-all placeholder:font-normal placeholder:text-slate-400 hover:border-slate-300 focus:border-purple-500 focus:bg-white focus:ring-4 focus:ring-purple-500/10"
                 />
+
                 <button
                   type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-650 transition-colors"
+                  onClick={() => setShowPassword((previous) => !previous)}
+                  aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                  aria-pressed={showPassword}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition-colors hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
                 >
-                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  {showPassword ? (
+                    <EyeOff className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="group flex w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-4 py-3.5 text-sm font-extrabold text-white shadow-md shadow-purple-600/15 transition-all duration-200 hover:-translate-y-0.5 hover:bg-purple-700 hover:shadow-lg hover:shadow-purple-600/20 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-purple-500/20 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+            >
+              {isLoading ? (
+                <>
+                  <LoaderCircle className="h-5 w-5 animate-spin" />
+                  <span>Đang đăng nhập...</span>
+                </>
+              ) : (
+                <>
+                  <span>Đăng nhập</span>
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </button>
+          </form>
+          <div className="mt-5 rounded-2xl border border-purple-100 bg-purple-50/70 p-4">
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-xs font-extrabold uppercase tracking-wider text-purple-700">
+                Tài khoản test
+              </span>
+            </div>
+
+            <div className="space-y-2 text-sm">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-slate-500">Email</span>
+                <button
+                  type="button"
+                  onClick={() => setEmail('admin@wms.com')}
+                  className="font-semibold text-slate-800 transition-colors hover:text-purple-600"
+                >
+                  admin@wms.com
+                </button>
+              </div>
+
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-slate-500">Mật khẩu</span>
+                <button
+                  type="button"
+                  onClick={() => setPassword('admin123')}
+                  className="font-semibold text-slate-800 transition-colors hover:text-purple-600"
+                >
+                  admin123
                 </button>
               </div>
             </div>
           </div>
 
-          <div>
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="group relative w-full flex justify-center py-3.5 px-4 border border-transparent text-sm font-extrabold rounded-2xl text-white bg-red-600 hover:bg-red-700 focus:outline-hidden focus:ring-2 focus:ring-offset-2 focus:ring-red-550 transition-all duration-200 shadow-lg shadow-red-550/20 disabled:opacity-75 disabled:cursor-not-allowed cursor-pointer"
-            >
-              {isLoading ? (
-                <Loader2 className="w-5 h-5 animate-spin" />
-              ) : (
-                <span className="flex items-center gap-1.5">
-                  Đăng nhập <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-                </span>
-              )}
-            </button>
+          <div className="mt-6 border-t border-slate-100 pt-5">
+            <p className="text-center text-xs leading-5 text-slate-500">
+              Hệ thống quản lý kho hàng
+              <span className="mx-2 text-slate-300">•</span>
+              Bảo mật và hiệu quả
+            </p>
           </div>
-        </form>
+        </section>
 
-        <div className="text-center mt-6">
-          <p className="text-sm text-slate-500 font-medium">
-            Quên mật khẩu?{' '}
-            <Link to="/forgot" className="font-bold text-red-600 hover:text-red-700 transition-colors">
-              Bấm vào đây để lấy lại
-            </Link>
-          </p>
-        </div>
+        <p className="mt-6 text-center text-xs text-slate-400">
+          © {new Date().getFullYear()} WMS LienDinh. All rights reserved.
+        </p>
       </div>
-    </div>
+    </main>
   );
 }

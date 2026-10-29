@@ -7,14 +7,14 @@ import {
 import { adminStyles } from "../../utils/styles";
 import type { DashboardData } from "../../types/warehouseDashboard";
 import { initialData } from "../../data/warehouseDashboard";
-import { DashboardStats, ImportExportChart, NetFlowChart, ProductionOverview } from "./dashboard";
+import { DashboardStats, ImportExportChart, NetFlowChart, ProductionOverview } from "../../components/admin/dashboard";
 
 export default function AdminDashboard() {
   const [data, setData] = useState<DashboardData>(initialData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const { summary, monthlyMovement, netFlow, defectiveStock, productionData, brands } = data;
+  const { summary, monthlyMovement, netFlow, defectiveStock, brands } = data;
 
   if (isLoading) {
     return (
@@ -56,7 +56,6 @@ export default function AdminDashboard() {
 
       <ProductionOverview
         brands={brands}
-        productionData={productionData}
       />
     </div>
   );

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { adminMenuSections } from '../../constants/adminMenu';
-import type { AdminMenuItem } from '../../constants/adminMenu';
-import { getAdminTheme } from '../../utils/styles';
+import { adminMenuSections } from '../../../constants/adminMenu';
+import type { AdminMenuItem } from '../../../constants/adminMenu';
+import { getAdminTheme } from '../../../utils/styles';
 import { useTranslation } from 'react-i18next';
 
 interface AdminSidebarProps {
@@ -105,38 +105,46 @@ export default function AdminSidebar({
                 </div>
             </div>
 
-            <nav
-                aria-label={t('adminMenu')}
-                className="flex-1 space-y-10 overflow-y-auto px-4 py-6"
-            >
+            <nav aria-label={t('adminMenu')} className={theme.nav}>
                 {adminMenuSections.map((section, index) => (
                     <section
                         key={section.titleKey}
                         className={
                             index < adminMenuSections.length - 1
-                                ? `border-b pb-6 ${theme.divider}`
+                                ? theme.navSectionDivider
                                 : ''
                         }
                     >
-                        <h2
-                            className={`mb-3 px-4 text-[10px] font-bold uppercase tracking-[0.16em] ${darkMode
-                                ? 'text-slate-500'
-                                : 'text-slate-400'
-                                }`}
-                        >
+                        <h2 className={theme.navSectionTitle}>
                             {t(section.titleKey)}
                         </h2>
 
                         <div className="space-y-1.5">
                             {section.items.map((item) => {
                                 const Icon = item.icon;
-                                const hasChildren = Boolean(
-                                    item.children?.length
-                                );
+                                const hasChildren = Boolean(item.children?.length);
                                 const isOpen = openMenu === item.labelKey;
                                 const isActive = isItemActive(item);
                                 const hasActiveChild =
                                     item.children?.some(isItemActive) ?? false;
+
+                                const isHighlighted = hasChildren
+                                    ? hasActiveChild
+                                    : isActive;
+
+                                const itemClassName = [
+                                    theme.navItem,
+                                    isHighlighted ? theme.navItemActive : '',
+                                ]
+                                    .filter(Boolean)
+                                    .join(' ');
+
+                                const iconClassName = [
+                                    'h-5 w-5 shrink-0',
+                                    isHighlighted
+                                        ? theme.navItemIconActive
+                                        : theme.navItemIcon,
+                                ].join(' ');
 
                                 return (
                                     <div key={item.labelKey}>
@@ -145,66 +153,43 @@ export default function AdminSidebar({
                                                 type="button"
                                                 onClick={() =>
                                                     setOpenMenu((prev) =>
-                                                        prev === item.labelKey
-                                                            ? ''
-                                                            : item.labelKey
+                                                        prev === item.labelKey ? '' : item.labelKey
                                                     )
                                                 }
                                                 aria-expanded={isOpen}
-                                                className={`flex w-full items-center justify-between gap-3.5 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 ${hasActiveChild
-                                                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
-                                                    : `${theme.secondary} ${theme.hover}`
-                                                    }`}
+                                                className={[
+                                                    itemClassName,
+                                                    'justify-between',
+                                                ].join(' ')}
                                             >
                                                 <span className="flex min-w-0 items-center gap-3.5">
-                                                    <Icon
-                                                        className={`h-5 w-5 shrink-0 ${hasActiveChild
-                                                            ? 'text-white'
-                                                            : darkMode
-                                                                ? 'text-slate-400'
-                                                                : 'text-slate-500'
-                                                            }`}
-                                                    />
-                                                    <span>
+                                                    <Icon className={iconClassName} />
+                                                    <span className="truncate">
                                                         {t(item.labelKey)}
                                                     </span>
                                                 </span>
 
                                                 <ChevronDown
-                                                    className={`h-4 w-4 shrink-0 transition-transform duration-200 ${isOpen
-                                                        ? 'rotate-180'
-                                                        : ''
-                                                        }`}
+                                                    className={[
+                                                        'h-4 w-4 shrink-0 transition-transform duration-200',
+                                                        isOpen ? 'rotate-180' : '',
+                                                    ].join(' ')}
                                                 />
                                             </button>
                                         ) : (
                                             <Link
                                                 to={item.path ?? '/admin'}
-                                                aria-current={
-                                                    isActive ? 'page' : undefined
-                                                }
-                                                className={`flex items-center gap-3.5 rounded-xl px-4 py-3 text-sm font-bold transition-all duration-200 ${isActive
-                                                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/15'
-                                                    : `${theme.secondary} ${theme.hover}`
-                                                    }`}
+                                                aria-current={isActive ? 'page' : undefined}
+                                                className={itemClassName}
                                             >
-                                                <Icon
-                                                    className={`h-5 w-5 shrink-0 ${isActive
-                                                        ? 'text-white'
-                                                        : darkMode
-                                                            ? 'text-slate-400'
-                                                            : 'text-slate-500'
-                                                        }`}
-                                                />
-                                                <span>
+                                                <Icon className={iconClassName} />
+                                                <span className="truncate">
                                                     {t(item.labelKey)}
                                                 </span>
                                             </Link>
                                         )}
 
-                                        {hasChildren &&
-                                            isOpen &&
-                                            renderSubmenu(item)}
+                                        {hasChildren && isOpen && renderSubmenu(item)}
                                     </div>
                                 );
                             })}

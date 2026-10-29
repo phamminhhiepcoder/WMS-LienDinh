@@ -1,6 +1,5 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { Brand } from '../../../types/brand';
-import type { ProductionData } from '../../../types/warehouseDashboard';
 import { Area, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer, AreaChart } from 'recharts';
 import { formatNumber } from '../../../utils/format';
 import { adminStyles } from '../../../utils/styles';
@@ -9,17 +8,42 @@ import { colorStyles } from '../../../data/warehouseDashboard';
 
 interface ProductionOverviewProps {
     brands: Brand[];
-    productionData: ProductionData[];
 }
 
 export default function ProductionOverview({
-    brands,
-    productionData,
+    brands
 }: ProductionOverviewProps) {
     const [timeRange, setTimeRange] = useState<'7d' | '30d' | '3m'>('3m');
     const [selectedBrand, setSelectedBrand] = useState(
         brands[0]?.name ?? '',
     );
+
+    const activeBrand = brands.find(
+        (brand) => brand.name === selectedBrand,
+    ) ?? brands[0];
+
+    const chartColor = activeBrand
+        ? {
+            blue: '#3B82F6',
+            violet: '#8B5CF6',
+            emerald: '#10B981',
+        }[activeBrand.color]
+        : '#3B82F6';
+
+    const gradientId = `productionGradient-${activeBrand?.color ?? 'default'}`;
+
+    const filteredChartData = useMemo(() => {
+        const allData = activeBrand?.productionData ?? [];
+
+        const limits = {
+            '7d': 7,
+            '30d': 30,
+            '3m': 90,
+        };
+
+        return allData.slice(-limits[timeRange]);
+    }, [activeBrand, timeRange]);
+
 
     return (
         <section className={`${adminStyles.section} space-y-6 rounded-2xl`}>
@@ -120,13 +144,19 @@ export default function ProductionOverview({
                 <div className="h-[280px] w-full sm:h-[340px]">
                     <ResponsiveContainer width="100%" height="100%">
                         <AreaChart
-                            data={productionData}
+                            data={filteredChartData}
                             margin={{ top: 10, right: 8, left: -15, bottom: 0 }}
                         >
                             <defs>
-                                <linearGradient id="productionGradient" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stopColor="#3B82F6" stopOpacity={0.25} />
-                                    <stop offset="95%" stopColor="#3B82F6" stopOpacity={0.01} />
+                                <linearGradient
+                                    id={gradientId}
+                                    x1="0"
+                                    y1="0"
+                                    x2="0"
+                                    y2="1"
+                                >
+                                    <stop offset="0%" stopColor={chartColor} stopOpacity={0.25} />
+                                    <stop offset="95%" stopColor={chartColor} stopOpacity={0.01} />
                                 </linearGradient>
                             </defs>
 
@@ -172,9 +202,9 @@ export default function ProductionOverview({
                                 type="monotone"
                                 dataKey="value"
                                 name="Sản lượng"
-                                stroke="#3B82F6"
+                                stroke={chartColor}
                                 strokeWidth={2.5}
-                                fill="url(#productionGradient)"
+                                fill={`url(#${gradientId})`}
                                 activeDot={{ r: 5, strokeWidth: 0 }}
                             />
                         </AreaChart>

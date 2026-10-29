@@ -50,5 +50,23 @@
     "save": "Save",
     "cancel": "Cancel",
     "loading": "Loading...",
-    "noData": "No data available"
+    "noData": "No data available",
+    "toolbar": {
+        "searchPlaceholder": "Search...",
+        "add": "Add new",
+        "clearSearch": "Clear search"
+    },
+    "pagination": {
+        "showing": "Showing {{from}}–{{to}} of {{total}} rows",
+        "page": "Page {{current}} of {{total}}",
+        "previous": "Previous Page",
+        "next": "Next Page",
+        "first": "First Page",
+        "last": "Last Page",
+        "pageSize": "Items per page"
+    },
+    "form": {
+        "dragDropImage": "Drag and drop an image here",
+        "orChooseImage": "or choose an image from your device"
+    }
 }

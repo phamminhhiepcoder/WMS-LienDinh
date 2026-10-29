@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { ChevronDown, UserRound, Settings, LogOut } from 'lucide-react';
-import { adminStyles, getAdminTheme } from '../../utils/styles';
+import { adminStyles, getAdminTheme } from '../../../utils/styles';
 
 interface UserDropdownProps {
     user: {
@@ -63,32 +63,30 @@ export default function AdminUserDropdown({
                 aria-haspopup="menu"
                 aria-expanded={isDropdownOpen}
                 aria-label="Mở menu tài khoản"
-                className={`flex items-center gap-3 rounded-2xl p-1.5 pl-2 transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-purple-500 ${isDropdownOpen
-                        ? darkMode ? 'bg-slate-800' : 'bg-slate-100'
-                        : 'hover:bg-slate-100 dark:hover:bg-slate-800/70'
-                    }`}
+                className={[
+                    theme.dropdownTrigger,
+                    isDropdownOpen ? theme.dropdownTriggerActive : '',
+                ].join(' ')}
             >
-                <div className="text-right hidden sm:block max-w-40">
-                    <div className={`text-sm font-bold truncate ${adminStyles.title}`}>
+                <div className={theme.dropdownTriggerInfo}>
+                    <div className={theme.dropdownTriggerName}>
                         {userName}
                     </div>
-                    <div className="text-[10px] text-purple-500 font-bold uppercase tracking-wider">
+
+                    <div className={theme.dropdownTriggerRole}>
                         {userRole}
                     </div>
                 </div>
 
-                <div
-                    className={`w-10 h-10 rounded-xl border flex items-center justify-center font-extrabold text-sm select-none ${darkMode
-                            ? 'bg-purple-950 text-purple-300 border-purple-800'
-                            : 'bg-purple-50 text-purple-600 border-purple-200'
-                        }`}
-                >
+                <div className={theme.dropdownTriggerAvatar}>
                     {userInitial}
                 </div>
 
                 <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-200 ${darkMode ? 'text-slate-400' : 'text-slate-500'
-                        } ${isDropdownOpen ? 'rotate-180' : ''}`}
+                    className={[
+                        theme.dropdownTriggerChevron,
+                        isDropdownOpen ? 'rotate-180' : '',
+                    ].join(' ')}
                 />
             </button>
 
@@ -99,13 +97,10 @@ export default function AdminUserDropdown({
                     role="menu"
                     aria-label="Menu tài khoản"
                 >
-                    <div className={`p-4 border-b ${darkMode ? 'border-slate-800' : 'border-slate-100'}`}>
+                    <div className={theme.dropdownHeader}>
                         <div className="flex items-center gap-3">
                             <div
-                                className={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-black border ${darkMode
-                                        ? 'bg-purple-950 text-purple-300 border-purple-800'
-                                        : 'bg-purple-50 text-purple-600 border-purple-200'
-                                    }`}
+                                className={theme.dropdownAvatar}
                             >
                                 {userInitial}
                             </div>
@@ -121,10 +116,7 @@ export default function AdminUserDropdown({
                         </div>
 
                         <div
-                            className={`mt-3 inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider ${darkMode
-                                    ? 'bg-emerald-950/60 text-emerald-400'
-                                    : 'bg-emerald-50 text-emerald-700'
-                                }`}
+                            className={theme.dropdownRole}
                         >
                             Vai trò: {userRole}
                         </div>
@@ -152,15 +144,12 @@ export default function AdminUserDropdown({
                         </button>
                     </div>
 
-                    <div className={`p-2 border-t ${darkMode ? 'border-slate-800' : 'border-slate-100'}`}>
+                    <div className={theme.dropdownFooter}>
                         <button
                             type="button"
                             role="menuitem"
                             onClick={() => handleMenuAction(onLogout)}
-                            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-left transition-colors ${darkMode
-                                    ? 'text-red-400 hover:bg-red-950/40'
-                                    : 'text-red-600 hover:bg-red-50'
-                                }`}
+                            className={theme.dropdownLogoutButton}
                         >
                             <LogOut className="w-4 h-4" />
                             Đăng xuất

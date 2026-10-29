@@ -2,7 +2,6 @@ import {
     LayoutDashboard,
     Boxes,
     History,
-    PackagePlus,
     PackageCheck,
     Radio,
     BarChart3,
@@ -11,7 +10,6 @@ import {
     ShieldCheck,
     Activity,
     Link2,
-    Clock3,
     PackageSearch,
     BuildingComplex,
     Warehouse,
@@ -57,25 +55,18 @@ export const adminMenuSections: AdminMenuSection[] = [
                     {
                         labelKey: 'suppliers',
                         icon: Truck,
-                        path: '/admin/inventory/imports',
+                        path: '/admin/suppliers',
                     },
                     {
                         labelKey: 'warehouses',
                         icon: Warehouse,
-                        path: '/admin/inventory/packing',
+                        path: '/admin/warehouses',
                     },
                 ],
             },
             {
                 labelKey: 'rfidSystem',
                 icon: Radio,
-                children: [
-                    {
-                        labelKey: 'Pending',
-                        icon: Clock3,
-                        path: '/admin/rfid',
-                    }
-                ],
             },
             {
                 labelKey: 'report',

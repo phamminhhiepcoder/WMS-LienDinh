@@ -50,5 +50,23 @@
     "save": "Lưu",
     "cancel": "Hủy",
     "loading": "Đang tải...",
-    "noData": "Không có dữ liệu"
+    "noData": "Không có dữ liệu",
+    "toolbar": {
+        "searchPlaceholder": "Tìm kiếm...",
+        "add": "Thêm mới",
+        "clearSearch": "Xóa nội dung tìm kiếm"
+    },
+    "pagination": {
+        "showing": "Hiển thị {{from}}–{{to}} trên tổng số {{total}} bản ghi",
+        "page": "Trang {{current}} / {{total}}",
+        "previous": "Trang trước",
+        "next": "Trang tiếp theo",
+        "first": "Trang đầu",
+        "last": "Trang cuối",
+        "pageSize": "Số mục mỗi trang"
+    },
+    "form": {
+        "dragDropImage": "Kéo thả ảnh vào đây",
+        "orChooseImage": "hoặc chọn ảnh từ thiết bị"
+    }
 }

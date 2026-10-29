@@ -2,13 +2,13 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
-import AdminHeader from '../../components/admin/AdminHeader';
-import AdminSidebar from '../../components/admin/AdminSidebar';
-import { adminMenuSections } from '../../constants/adminMenu';
-import { getAdminTheme } from '../../utils/styles';
+import { useAuth } from '../../../contexts/AuthContext';
+import AdminHeader from './AdminHeader';
+import AdminSidebar from './AdminSidebar';
+import { adminMenuSections } from '../../../constants/adminMenu';
+import { getAdminTheme } from '../../../utils/styles';
 import { useTranslation } from 'react-i18next';
-import type { AdminMenuItem } from '../../constants/adminMenu';
+import type { AdminMenuItem } from '../../../constants/adminMenu';
 
 export default function AdminLayout() {
   const { user, loading, logout } = useAuth();
@@ -26,15 +26,16 @@ export default function AdminLayout() {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setSidebarOpen(false);
-      }
+      setSidebarOpen(window.innerWidth >= 768);
     };
 
     handleResize();
+
     window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
 
   useEffect(() => {

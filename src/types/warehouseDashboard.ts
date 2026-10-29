@@ -33,6 +33,5 @@ export interface DashboardData {
   monthlyMovement: MonthlyMovement[];
   netFlow: NetFlow[];
   defectiveStock: DefectiveStock[];
-  productionData: ProductionData[];
   brands: Brand[];
 }

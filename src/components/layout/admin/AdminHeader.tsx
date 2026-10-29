@@ -12,9 +12,11 @@ import {
     Menu,
 } from 'lucide-react';
 
-import { adminStyles, getAdminTheme } from '../../utils/styles';
+import { adminStyles, getAdminTheme } from '../../../utils/styles';
 import AdminUserDropdown from './AdminUserDropdown';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../../../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 interface AdminHeaderProps {
     title: string;
@@ -43,7 +45,6 @@ export default function AdminHeader({
     onToggleSidebar,
     onProfile,
     onSettings,
-    onLogout,
     onSearch,
     zoom = 100,
     onZoomChange,
@@ -74,76 +75,71 @@ export default function AdminHeader({
         setShowLanguageMenu(false);
     };
 
-    const controlButtonClass = [
-        'h-10 w-10 shrink-0 flex items-center justify-center',
-        'rounded-xl border transition-colors duration-200',
-        darkMode
-            ? 'bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700'
-            : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100',
-    ].join(' ');
 
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogout = async () => {
+        try {
+            await logout();
+            navigate('/login', { replace: true });
+        } catch (error) {
+            console.error('Đăng xuất thất bại:', error);
+        }
+    };
     return (
-        <header className={`${theme.header} relative`}>
+
+        <header className={`${theme.header} relative min-w-0 flex-wrap gap-y-2`}>
             <button
                 type="button"
                 onClick={onToggleSidebar}
                 aria-label={sidebarOpen ? 'Ẩn thanh bên' : 'Hiện thanh bên'}
                 title={sidebarOpen ? 'Ẩn thanh bên' : 'Hiện thanh bên'}
-                className={controlButtonClass}
+                className={theme.controlButtonClass}
             >
-                {sidebarOpen ? (
-                    <Menu className="w-5 h-5" />
-                ) : (
-                    <Menu className="w-5 h-5" />
-                )}
+                <Menu className="h-5 w-5" />
             </button>
 
             <h2
-                className={`hidden xl:block font-extrabold text-base tracking-tight whitespace-nowrap ${adminStyles.title}`}
+                className={`hidden 2xl:block shrink-0 max-w-48 truncate text-sm font-extrabold tracking-tight ${adminStyles.title}`}
             >
                 {title}
             </h2>
 
-            <div className="flex flex-1 items-center justify-end gap-2 sm:gap-3 min-w-0">
-                {/* Search */}
+            <div className="flex min-w-0 flex-1 items-center justify-end gap-1.5 sm:gap-2">
                 <form
                     onSubmit={handleSearch}
                     role="search"
-                    className="relative flex-1 min-w-0 max-w-xs"
+                    className="relative min-w-0 max-w-[220px] flex-1"
                 >
                     <Search
-                        className={`absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 ${darkMode ? 'text-slate-400' : 'text-slate-500'
-                            }`}
+                        className={`absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 ${theme.headerSearchIcon}`}
                     />
 
                     <input
                         type="search"
                         value={searchQuery}
-                        onChange={(event) =>
-                            setSearchQuery(event.target.value)
-                        }
+                        onChange={(event) => setSearchQuery(event.target.value)}
                         placeholder={t('search')}
                         aria-label={t('search')}
-                        className={`${adminStyles.input} h-10 pl-9 pr-3 text-sm`}
+                        className={`${adminStyles.input} h-10 w-full min-w-0 pl-9 pr-3 text-sm`}
                     />
                 </form>
 
-                {/* Zoom */}
-                <div className="hidden sm:flex items-center gap-1">
+                <div className="hidden items-center gap-1 sm:flex">
                     <button
                         type="button"
                         onClick={() => handleZoom(-5)}
                         disabled={zoom <= 75}
                         title={t('zoomOut')}
                         aria-label={t('zoomOut')}
-                        className={`${controlButtonClass} disabled:opacity-40 disabled:cursor-not-allowed`}
+                        className={`${theme.controlButtonClass} ${theme.controlButtonDisabled}`}
                     >
-                        <ZoomOut className="w-4 h-4" />
+                        <ZoomOut className="h-4 w-4" />
                     </button>
 
                     <span
-                        className={`min-w-12 text-center text-xs font-bold tabular-nums ${darkMode ? 'text-slate-300' : 'text-slate-600'
-                            }`}
+                        className={`min-w-12 text-center text-xs font-bold tabular-nums ${theme.headerZoomText}`}
                     >
                         {zoom}%
                     </span>
@@ -154,65 +150,61 @@ export default function AdminHeader({
                         disabled={zoom >= 125}
                         title={t('zoomIn')}
                         aria-label={t('zoomIn')}
-                        className={`${controlButtonClass} disabled:opacity-40 disabled:cursor-not-allowed`}
+                        className={`${theme.controlButtonClass} ${theme.controlButtonDisabled}`}
                     >
-                        <ZoomIn className="w-4 h-4" />
+                        <ZoomIn className="h-4 w-4" />
                     </button>
                 </div>
 
-                {/* Language */}
                 <div className="relative shrink-0">
                     <button
                         type="button"
-                        onClick={() =>
-                            setShowLanguageMenu((previous) => !previous)
-                        }
+                        onClick={() => setShowLanguageMenu((previous) => !previous)}
                         aria-label={t('selectLanguage')}
                         aria-expanded={showLanguageMenu}
                         title={t('language')}
-                        className={`${controlButtonClass} gap-1 px-2 w-auto`}
+                        className={`${theme.controlButtonClass} ${theme.languageButton}`}
                     >
-                        <Languages className="w-4 h-4" />
+                        <Languages className="h-4 w-4" />
                         <span className="text-xs font-bold uppercase">
                             {currentLanguage}
                         </span>
                     </button>
 
                     {showLanguageMenu && (
-                        <div
-                            className={`absolute right-0 top-full mt-2 z-50 w-40 rounded-xl border shadow-xl p-1 ${darkMode
-                                ? 'bg-slate-900 border-slate-700'
-                                : 'bg-white border-slate-200'
-                                }`}
-                        >
+                        <div className={theme.languageDropdown}>
                             {(
                                 [
                                     { value: 'vi', label: 'Tiếng Việt' },
                                     { value: 'en', label: 'English' },
                                 ] as const
-                            ).map((item) => (
-                                <button
-                                    key={item.value}
-                                    type="button"
-                                    onClick={() =>
-                                        changeLanguage(item.value)
-                                    }
-                                    className={`w-full flex items-center justify-between gap-2 px-3 py-2.5 rounded-lg text-sm ${currentLanguage === item.value
-                                        ? 'text-purple-600 bg-purple-50 dark:bg-purple-950/50 dark:text-purple-300'
-                                        : `${theme.secondary} ${theme.hover}`
-                                        }`}
-                                >
-                                    {item.label}
-                                    {currentLanguage === item.value && (
-                                        <Check className="w-4 h-4" />
-                                    )}
-                                </button>
-                            ))}
+                            ).map((item) => {
+                                const isSelected = currentLanguage === item.value;
+
+                                return (
+                                    <button
+                                        key={item.value}
+                                        type="button"
+                                        onClick={() => changeLanguage(item.value)}
+                                        className={[
+                                            theme.languageOption,
+                                            isSelected
+                                                ? theme.languageOptionActive
+                                                : theme.languageOptionInactive,
+                                        ].join(' ')}
+                                    >
+                                        {item.label}
+
+                                        {isSelected && (
+                                            <Check className="h-4 w-4" />
+                                        )}
+                                    </button>
+                                );
+                            })}
                         </div>
                     )}
                 </div>
 
-                {/* Dark mode */}
                 <button
                     type="button"
                     onClick={onToggleDarkMode}
@@ -229,9 +221,9 @@ export default function AdminHeader({
                     className={theme.themeToggleButton}
                 >
                     {darkMode ? (
-                        <Sun className="w-5 h-5" />
+                        <Sun className="h-5 w-5" />
                     ) : (
-                        <Moon className="w-5 h-5" />
+                        <Moon className="h-5 w-5" />
                     )}
                 </button>
 
@@ -240,9 +232,10 @@ export default function AdminHeader({
                     darkMode={darkMode}
                     onProfile={onProfile}
                     onSettings={onSettings}
-                    onLogout={onLogout}
+                    onLogout={handleLogout}
                 />
             </div>
         </header>
+
     );
 }

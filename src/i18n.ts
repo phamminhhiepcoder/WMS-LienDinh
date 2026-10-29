@@ -1,19 +1,30 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import vi from './locales/vi.json';
-import en from './locales/en.json';
+import viCommon from './locales/vi/common.json';
+import viBrands from './locales/vi/brands.json';
 
-const savedLanguage =
-    localStorage.getItem('admin-language') || 'vi';
+import enCommon from './locales/en/common.json';
+import enBrands from './locales/en/brands.json';
 
 i18n.use(initReactI18next).init({
     resources: {
-        vi: { translation: vi },
-        en: { translation: en },
+        vi: {
+            common: viCommon,
+            brands: viBrands,
+        },
+        en: {
+            common: enCommon,
+            brands: enBrands,
+        },
     },
-    lng: savedLanguage,
+
+    lng: 'vi',
     fallbackLng: 'vi',
+
+    defaultNS: 'common',
+    ns: ['common', 'brands'],
+
     interpolation: {
         escapeValue: false,
     },
