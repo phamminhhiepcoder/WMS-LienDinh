@@ -1,8 +1,6 @@
 import type { BrandColor } from '../types/brand';
 import type { DashboardData } from '../types/warehouseDashboard';
 
-
-
 export const initialData: DashboardData = {
     summary: {
         totalImport: 12500,

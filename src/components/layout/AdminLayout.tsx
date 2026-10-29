@@ -16,6 +16,7 @@ export default function AdminLayout() {
   const { t } = useTranslation();
 
   const [sidebarOpen, setSidebarOpen] = useState(true);
+
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem('admin-dark-mode') === 'true'
   );
@@ -24,11 +25,23 @@ export default function AdminLayout() {
   const theme = getAdminTheme(darkMode);
 
   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setSidebarOpen(false);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     localStorage.setItem('admin-dark-mode', String(darkMode));
     document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
 
-  // Lấy toàn bộ menu chính và menu con từ các section
   const allMenuItems: AdminMenuItem[] = adminMenuSections.flatMap(
     (section) =>
       section.items.flatMap((item) => [
@@ -36,8 +49,6 @@ export default function AdminLayout() {
         ...(item.children ?? []),
       ])
   );
-
-  // Xác định menu đang hoạt động theo URL
   const currentMenu = allMenuItems
     .filter((item) => {
       if (!item.path) return false;
