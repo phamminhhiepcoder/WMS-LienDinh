@@ -1,7 +1,7 @@
-# WMS-DinhVang 
+# WMS-LienDinh 
 ---
 ## Introduction
-Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built with React, TypeScript, Tailwind CSS, and Chart.js. This project provides an intuitive and responsive interface for monitoring warehouse operations, visualizing inventory data, and tracking key performance indicators, including inbound and outbound goods, stock levels, net stock flow, and defective inventory.
+Welcome to WMS-LienDinh, a Warehouse Management System (WMS) Dashboard built with React, TypeScript, Tailwind CSS, and Chart.js. This project provides an intuitive and responsive interface for monitoring warehouse operations, visualizing inventory data, and tracking key performance indicators, including inbound and outbound goods, stock levels, net stock flow, and defective inventory.
 
 
 ## Dummy User Accounts
@@ -19,8 +19,8 @@ Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built wit
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/phamminhhiepcoder/WMS-DinhVang.git
-    cd WMS-DinhVang
+    git clone https://github.com/phamminhhiepcoder/WMS-LienDinh.git
+    cd WMS-LienDinh
     ```
 2.  Install dependencies:
     ```bash
@@ -88,7 +88,7 @@ Welcome to WMS-DinhVang, a Warehouse Management System (WMS) Dashboard built wit
 
 ## Hosting Your Complete App on Vercel
 
-This guide explains how to deploy the WMS-DinhVang React application to Vercel. Since the project only contains a frontend and does not require a backend, Vercel can host the entire application as a static website.
+This guide explains how to deploy the WMS-LienDinh React application to Vercel. Since the project only contains a frontend and does not require a backend, Vercel can host the entire application as a static website.
 
 ### Step 1: Prepare Your Project
 
@@ -120,7 +120,7 @@ After the build completes, the production files will be generated in the build d
 ### Step 4: Create a Vercel Project
 
 - Create a new project in Vercel.
-- Select your GitHub repository (e.g., WMS-DinhVang).
+- Select your GitHub repository (e.g., WMS-LienDinh).
 
 ### Step 5: Configure Project Settings
 

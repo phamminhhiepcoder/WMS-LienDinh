@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-
 import ErrorBoundary from './components/common/ErrorBoundary';
 import AdminLayout from './components/layout/admin/AdminLayout';
 import Login from './pages/auth/Login';
@@ -12,7 +11,6 @@ import AdminSuppliers from './pages/admin/AdminSuppliers';
 import AdminSettings from './pages/admin/AdminSettings';
 import AdminInventory from './pages/admin/AdminInventory';
 import AdminBrands from './pages/admin/AdminBrands';
-import AdminIMES from './pages/admin/AdminIMES';
 
 function AppContent() {
   return (
@@ -31,7 +29,6 @@ function AppContent() {
               <Route path="suppliers" element={<AdminSuppliers />} />
               <Route path="settings" element={<AdminSettings />} />
               <Route path="brands" element={<AdminBrands />} />
-              <Route path="iMES" element={<AdminIMES />} />
             </Route>
           </Routes>
         </ErrorBoundary>
