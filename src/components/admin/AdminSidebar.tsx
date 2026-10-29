@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { adminMenuItems } from '../../constants/adminMenu';
 import { getAdminTheme } from '../../utils/styles';
 import AdminFooter from './AdminFooter';
+import { useTranslation } from 'react-i18next';
 
 interface AdminSidebarProps {
     darkMode: boolean;
@@ -14,6 +15,7 @@ export default function AdminSidebar({
 }: AdminSidebarProps) {
     const location = useLocation();
     const theme = getAdminTheme(darkMode);
+    const { t } = useTranslation();
 
     return (
         <aside className={`w-full md:w-64 border-r flex flex-col shrink-0 transition-colors duration-300 ${theme.sidebar}`}>
@@ -57,14 +59,14 @@ export default function AdminSidebar({
                         >
                             <Icon
                                 className={`w-5 h-5 ${isActive
-                                        ? 'text-white'
-                                        : darkMode
-                                            ? 'text-slate-400'
-                                            : 'text-slate-500'
+                                    ? 'text-white'
+                                    : darkMode
+                                        ? 'text-slate-400'
+                                        : 'text-slate-500'
                                     }`}
                             />
 
-                            <span>{item.label}</span>
+                            <span>{t(item.labelKey)}</span>
                         </Link>
                     );
                 })}

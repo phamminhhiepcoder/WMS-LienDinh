@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
@@ -6,14 +6,18 @@ import AdminHeader from '../../components/admin/AdminHeader';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import { adminMenuItems } from '../../constants/adminMenu';
 import { getAdminTheme } from '../../utils/styles';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminLayout() {
   const { user, loading, logout } = useAuth();
   const location = useLocation();
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const { t } = useTranslation();
 
   const [darkMode, setDarkMode] = useState(
     () => localStorage.getItem('admin-dark-mode') === 'true'
   );
+  const [zoom, setZoom] = useState(100);
 
   const theme = getAdminTheme(darkMode);
 
@@ -32,7 +36,9 @@ export default function AdminLayout() {
     )
     .sort((a, b) => b.path.length - a.path.length)[0];
 
-  const currentTitle = currentMenu?.label ?? 'Bảng điều khiển';
+  const currentTitle = currentMenu
+    ? t(currentMenu.labelKey)
+    : t('dashboard');
 
   if (loading) {
     return (
@@ -63,10 +69,12 @@ export default function AdminLayout() {
 
   return (
     <div className={`min-h-screen flex flex-col md:flex-row antialiased transition-colors duration-300 ${theme.page}`}>
-      <AdminSidebar
+      { sidebarOpen && <AdminSidebar
         darkMode={darkMode}
         onLogout={logout}
       />
+      }
+      
 
       <main className={`flex-1 flex flex-col min-h-0 min-w-0 transition-colors duration-300 ${theme.main}`}>
         <AdminHeader
@@ -74,9 +82,15 @@ export default function AdminLayout() {
           user={user}
           darkMode={darkMode}
           onToggleDarkMode={() => setDarkMode((prev) => !prev)}
+          onToggleSidebar={() => setSidebarOpen((prev) => !prev)}
+          zoom={zoom}
+          onZoomChange={setZoom}
         />
 
-        <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto min-h-0 min-w-0 w-full">
+        <div
+          className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto min-h-0 min-w-0 w-full"
+          style={{ zoom: `${zoom}%` }}
+        >
           <Outlet />
         </div>
       </main>
