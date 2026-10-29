@@ -35,7 +35,7 @@
     "administration": "Administration",
     "userManagement": "User Management",
     "settings": "System Settings",
-    "search": "Search...",
+    "search": "Search..",
     "profile": "My Profile",
     "logout": "Log out",
     "language": "Language",
@@ -49,10 +49,10 @@
     "delete": "Delete",
     "save": "Save",
     "cancel": "Cancel",
-    "loading": "Loading...",
+    "loading": "Loading..",
     "noData": "No data available",
     "toolbar": {
-        "searchPlaceholder": "Search...",
+        "searchPlaceholder": "Search..",
         "add": "Add new",
         "clearSearch": "Clear search"
     },

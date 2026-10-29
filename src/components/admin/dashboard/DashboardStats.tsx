@@ -1,3 +1,6 @@
+
+import { useTranslation } from 'react-i18next';
+
 import {
     TrendingUp,
     TrendingDown,
@@ -15,34 +18,40 @@ interface DashboardStatsProps {
 export default function DashboardStats({
     summary,
 }: DashboardStatsProps) {
+    const { t } = useTranslation('dashboard');
+
     const stats = [
         {
-            label: 'Tổng số lượng nhập',
+            key: 'totalImport',
+            label: t('stats.totalImport'),
             value: formatNumber(summary.totalImport),
             change: 12.5,
             changeAmount: 320,
-            unit: 'sản phẩm',
+            unit: t('stats.products'),
         },
         {
-            label: 'Tổng số lượng xuất',
+            key: 'totalExport',
+            label: t('stats.totalExport'),
             value: formatNumber(summary.totalExport),
             change: -8.2,
             changeAmount: 150,
-            unit: 'sản phẩm',
+            unit: t('stats.products'),
         },
         {
-            label: 'Tổng tồn kho',
+            key: 'currentStock',
+            label: t('stats.currentStock'),
             value: formatNumber(summary.currentStock),
             change: 0,
             changeAmount: 0,
-            unit: 'sản phẩm',
+            unit: t('stats.products'),
         },
         {
-            label: 'Vòng quay tồn kho',
-            value: `${summary.inventoryTurnover.toFixed(2)} vòng`,
+            key: 'inventoryTurnover',
+            label: t('stats.inventoryTurnover'),
+            value: `${summary.inventoryTurnover.toFixed(2)} ${t('stats.turns')}`,
             change: -15.4,
             changeAmount: 0.76,
-            unit: 'vòng',
+            unit: t('stats.turns'),
         },
     ];
 
@@ -66,7 +75,7 @@ export default function DashboardStats({
 
                 return (
                     <div
-                        key={stat.label}
+                        key={stat.key}
                         className={`${adminStyles.statCard} rounded-2xl`}
                     >
                         <p className={`text-xs font-bold uppercase tracking-wide ${adminStyles.mutedText}`}>
@@ -84,12 +93,12 @@ export default function DashboardStats({
                             </span>
 
                             <span className={`text-xs ${adminStyles.mutedText}`}>
-                                So với tháng trước
+                                {t('stats.comparedToLastMonth')}
                             </span>
                         </div>
 
                         <p className={`mt-2 text-xs ${adminStyles.mutedText}`}>
-                            Chênh lệch: {formatNumber(stat.changeAmount)} {stat.unit}
+                            {t('stats.difference')}: {formatNumber(stat.changeAmount)} {stat.unit}
                         </p>
                     </div>
                 );

@@ -1,0 +1,48 @@
+{
+    "description": "Provides an overview of key metrics, including statistics, warehouse inbound/outbound operations, and other activities",
+    "stats": {
+        "totalImport": "Total Imports",
+        "totalExport": "Total Exports",
+        "currentStock": "Current Stock",
+        "inventoryTurnover": "Inventory Turnover",
+        "products": "products",
+        "turns": "turns",
+        "comparedToLastMonth": "Compared to last month",
+        "difference": "Difference"
+    },
+    "importExport": {
+        "title": "Import/Export Overview",
+        "description": "Compare the quantities of goods imported and exported each month",
+        "unit": "Unit: products",
+        "import": "Imports",
+        "export": "Exports"
+    },
+    "netFlow": {
+        "title": "Net Inventory Flow",
+        "description": "Difference between imported and exported quantities by month",
+        "seriesName": "Net Flow",
+        "total": "Total net inventory flow for the period",
+        "products": "products"
+    },
+    "defectiveStock": {
+        "title": "Defective Inventory Overview",
+        "description": "Proportion of defective goods relative to total inventory",
+        "defective": "Defective Goods",
+        "quantity": "Defective Quantity",
+        "rate": "Defect Rate"
+    },
+    "production": {
+        "title": "Finished Goods Production Overview",
+        "description": "Track production output by brand and time period",
+        "timeRanges": {
+            "7d": "7 days",
+            "30d": "30 days",
+            "3m": "3 months"
+        },
+        "viewingChart": "Viewing chart",
+        "chartTitle": "Production Over Time",
+        "selectedBrand": "Selected brand: {{brand}}",
+        "unit": "Unit: products",
+        "quantity": "Production"
+    }
+}

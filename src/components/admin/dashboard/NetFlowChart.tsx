@@ -1,6 +1,21 @@
 
+import { useTranslation } from 'react-i18next';
 import type { DefectiveStock, NetFlow } from '../../../types/warehouseDashboard';
-import { LineChart, CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer, PieChart, Legend, Line, Cell, Pie } from 'recharts';
+
+import {
+    LineChart,
+    CartesianGrid,
+    Tooltip,
+    XAxis,
+    YAxis,
+    ResponsiveContainer,
+    PieChart,
+    Legend,
+    Line,
+    Cell,
+    Pie,
+} from 'recharts';
+
 import { formatNumber, formatTooltip } from '../../../utils/format';
 import { adminStyles } from '../../../utils/styles';
 import { AlertTriangle, TrendingUp } from 'lucide-react';
@@ -12,13 +27,16 @@ interface NetFlowChartProps {
 
 export default function NetFlowChart({
     netFlow,
-    defectiveStock
+    defectiveStock,
 }: NetFlowChartProps) {
-    const DEFECT_COLORS = ["#EF4444", "#10B981"];
+    const { t } = useTranslation('dashboard');
 
-    const totalDefective = defectiveStock.find(
-        (item) => item.name === "Hàng lỗi"
-    )?.quantity ?? 0;
+    const DEFECT_COLORS = ['#EF4444', '#10B981'];
+
+    const totalDefective =
+        defectiveStock.find(
+            (item) => item.name === 'Hàng lỗi'
+        )?.quantity ?? 0;
 
     const totalInventory = defectiveStock.reduce(
         (total, item) => total + item.quantity,
@@ -28,22 +46,23 @@ export default function NetFlowChart({
     const defectiveRate =
         totalInventory > 0
             ? ((totalDefective / totalInventory) * 100).toFixed(1)
-            : "0.0";
+            : '0.0';
 
     return (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-5 sm:gap-6">
+            {/* Dòng hàng ròng */}
             <section className={`${adminStyles.section} rounded-2xl space-y-5`}>
                 <div>
                     <div className="flex items-center gap-2">
                         <TrendingUp className="w-5 h-5 text-emerald-500" />
 
                         <h2 className={adminStyles.sectionTitle}>
-                            Dòng hàng ròng
+                            {t('netFlow.title')}
                         </h2>
                     </div>
 
                     <p className={`text-xs mt-2 ${adminStyles.mutedText}`}>
-                        Chênh lệch giữa số lượng nhập và xuất theo tháng.
+                        {t('netFlow.description')}
                     </p>
                 </div>
 
@@ -74,10 +93,12 @@ export default function NetFlowChart({
                             />
 
                             <Tooltip
-                                formatter={(value) => formatTooltip(Number(value))}
+                                formatter={(value) =>
+                                    formatTooltip(Number(value ?? 0))
+                                }
                                 contentStyle={{
                                     borderRadius: 12,
-                                    border: "1px solid #E2E8F0",
+                                    border: '1px solid #E2E8F0',
                                     fontSize: 12,
                                 }}
                             />
@@ -85,14 +106,14 @@ export default function NetFlowChart({
                             <Line
                                 type="monotone"
                                 dataKey="quantity"
-                                name="Hàng ròng"
+                                name={t('netFlow.seriesName')}
                                 stroke="#10B981"
                                 strokeWidth={3}
                                 dot={{
                                     r: 4,
-                                    fill: "#10B981",
+                                    fill: '#10B981',
                                     strokeWidth: 2,
-                                    stroke: "#FFFFFF",
+                                    stroke: '#FFFFFF',
                                 }}
                                 activeDot={{ r: 6 }}
                             />
@@ -102,14 +123,17 @@ export default function NetFlowChart({
 
                 <div className={`${adminStyles.softPanel} p-4 rounded-xl`}>
                     <p className={`text-xs ${adminStyles.mutedText}`}>
-                        Tổng dòng hàng ròng trong kỳ
+                        {t('netFlow.total')}
                     </p>
 
                     <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-1">
                         {formatNumber(
-                            netFlow.reduce((sum, item) => sum + item.quantity, 0)
-                        )}{" "}
-                        sản phẩm
+                            netFlow.reduce(
+                                (sum, item) => sum + item.quantity,
+                                0
+                            )
+                        )}{' '}
+                        {t('netFlow.products')}
                     </p>
                 </div>
             </section>
@@ -121,12 +145,12 @@ export default function NetFlowChart({
                         <AlertTriangle className="w-5 h-5 text-red-500" />
 
                         <h2 className={adminStyles.sectionTitle}>
-                            Tổng quan tồn kho hàng lỗi
+                            {t('defectiveStock.title')}
                         </h2>
                     </div>
 
                     <p className={`text-xs mt-2 ${adminStyles.mutedText}`}>
-                        Tỷ trọng hàng lỗi so với tổng số lượng tồn kho.
+                        {t('defectiveStock.description')}
                     </p>
                 </div>
 
@@ -134,7 +158,13 @@ export default function NetFlowChart({
                     <ResponsiveContainer width="100%" height="100%">
                         <PieChart>
                             <Pie
-                                data={defectiveStock}
+                                data={defectiveStock.map((item) => ({
+                                    ...item,
+                                    name:
+                                        item.name === 'Hàng lỗi'
+                                            ? t('defectiveStock.defective')
+                                            : item.name,
+                                }))}
                                 dataKey="quantity"
                                 nameKey="name"
                                 cx="50%"
@@ -153,10 +183,12 @@ export default function NetFlowChart({
                             </Pie>
 
                             <Tooltip
-                                formatter={(value) => formatTooltip(Number(value))}
+                                formatter={(value) =>
+                                    formatTooltip(Number(value ?? 0))
+                                }
                                 contentStyle={{
                                     borderRadius: 12,
-                                    border: "1px solid #E2E8F0",
+                                    border: '1px solid #E2E8F0',
                                     fontSize: 12,
                                 }}
                             />
@@ -172,7 +204,7 @@ export default function NetFlowChart({
                 <div className="grid grid-cols-2 gap-3">
                     <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/30">
                         <p className="text-xs font-semibold text-red-600 dark:text-red-400">
-                            Số lượng hàng lỗi
+                            {t('defectiveStock.quantity')}
                         </p>
 
                         <p className="text-xl font-black text-red-600 dark:text-red-400 mt-2">
@@ -182,7 +214,7 @@ export default function NetFlowChart({
 
                     <div className="p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/30">
                         <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
-                            Tỷ lệ hàng lỗi
+                            {t('defectiveStock.rate')}
                         </p>
 
                         <p className="text-xl font-black text-emerald-600 dark:text-emerald-400 mt-2">

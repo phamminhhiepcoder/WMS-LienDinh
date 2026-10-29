@@ -1,5 +1,17 @@
+
+import { useTranslation } from 'react-i18next';
+import {
+    CartesianGrid,
+    Tooltip,
+    XAxis,
+    YAxis,
+    ResponsiveContainer,
+    Legend,
+    Bar,
+    BarChart,
+} from 'recharts';
+
 import type { MonthlyMovement } from '../../../types/warehouseDashboard';
-import { CartesianGrid, Tooltip, XAxis, YAxis, ResponsiveContainer, Legend, Bar, BarChart } from 'recharts';
 import { formatTooltip } from '../../../utils/format';
 import { adminStyles } from '../../../utils/styles';
 
@@ -10,21 +22,23 @@ interface ImportExportChartProps {
 export default function ImportExportChart({
     data,
 }: ImportExportChartProps) {
+    const { t } = useTranslation('dashboard');
 
     return (
         <section className={`${adminStyles.section} rounded-2xl space-y-5`}>
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div>
                     <h2 className={adminStyles.sectionTitle}>
-                        Tổng quan nhập/xuất kho
+                        {t('importExport.title')}
                     </h2>
+
                     <p className={`text-xs mt-2 ${adminStyles.mutedText}`}>
-                        So sánh số lượng hàng nhập và xuất theo từng tháng.
+                        {t('importExport.description')}
                     </p>
                 </div>
 
                 <span className="text-xs font-bold px-3 py-2 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400">
-                    Đơn vị: sản phẩm
+                    {t('importExport.unit')}
                 </span>
             </div>
 
@@ -41,43 +55,51 @@ export default function ImportExportChart({
                             stroke="#94A3B8"
                             strokeOpacity={0.2}
                         />
+
                         <XAxis
                             dataKey="month"
                             tick={{ fontSize: 12 }}
                             axisLine={false}
                             tickLine={false}
                         />
+
                         <YAxis
                             tick={{ fontSize: 11 }}
                             axisLine={false}
                             tickLine={false}
                             tickFormatter={(value: number) =>
-                                new Intl.NumberFormat("vi-VN", {
-                                    notation: "compact",
+                                new Intl.NumberFormat('vi-VN', {
+                                    notation: 'compact',
                                 }).format(value)
                             }
                         />
+
                         <Tooltip
-                            formatter={(value) => formatTooltip(Number(value ?? 0))}
+                            formatter={(value) =>
+                                formatTooltip(Number(value ?? 0))
+                            }
                             contentStyle={{
                                 borderRadius: 12,
-                                border: "1px solid #E2E8F0",
+                                border: '1px solid #E2E8F0',
                                 fontSize: 12,
                             }}
                         />
+
                         <Legend
                             wrapperStyle={{ fontSize: 12, paddingTop: 12 }}
                         />
+
                         <Bar
                             dataKey="importQuantity"
-                            name="Nhập kho"
+                            name={t('importExport.import')}
                             fill="#3B82F6"
                             radius={[5, 5, 0, 0]}
                             maxBarSize={32}
                         />
+
                         <Bar
                             dataKey="exportQuantity"
-                            name="Xuất kho"
+                            name={t('importExport.export')}
                             fill="#8B5CF6"
                             radius={[5, 5, 0, 0]}
                             maxBarSize={32}

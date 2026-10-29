@@ -62,6 +62,11 @@ export const adminMenuSections: AdminMenuSection[] = [
                         icon: Warehouse,
                         path: '/admin/warehouses',
                     },
+                    {
+                        labelKey: 'products',
+                        icon: Boxes,
+                        path: '/admin/products',
+                    },
                 ],
             },
             {
@@ -76,39 +81,39 @@ export const adminMenuSections: AdminMenuSection[] = [
                     {
                         labelKey: 'inventoryReport',
                         icon: Package,
-                        path: '/admin/reports/inventory',
+                        path: '#',
                     },
                     {
                         labelKey: 'importExportReport',
                         icon: ArrowLeftRight,
-                        path: '/admin/reports/import-export',
+                        path: '#',
                     },
                     {
                         labelKey: 'stockMovementReport',
                         icon: History,
-                        path: '/admin/reports/stock-movement',
+                        path: '#',
                     },
                     {
                         labelKey: 'lowStockReport',
                         icon: AlertTriangle,
-                        path: '/admin/reports/low-stock',
+                        path: '#',
                     },
                     {
                         labelKey: 'defectiveStockReport',
                         icon: PackageX,
-                        path: '/admin/reports/defective-stock',
+                        path: '#',
                     },
                     {
                         labelKey: 'productionReport',
                         icon: Factory,
-                        path: '/admin/reports/production',
+                        path: '#',
                     },
                 ],
             },
             {
                 labelKey: 'shippingManage',
                 icon: Truck,
-                path: '/admin/shipping',
+                path: '#',
             },
             {
                 labelKey: 'lookup',
@@ -117,17 +122,17 @@ export const adminMenuSections: AdminMenuSection[] = [
                     {
                         labelKey: 'inventoryTransactionHistory',
                         icon: History,
-                        path: '/admin/inventory',
+                        path: '#',
                     },
                     {
                         labelKey: 'orderTracking',
                         icon: PackageSearch,
-                        path: '/admin/inventory/order',
+                        path: '#',
                     },
                     {
                         labelKey: 'packingInformation',
                         icon: PackageCheck,
-                        path: '/admin/inventory/packing',
+                        path: '#',
                     },
                 ],
             },
@@ -139,7 +144,7 @@ export const adminMenuSections: AdminMenuSection[] = [
             {
                 labelKey: 'iMESSystem',
                 icon: Link2,
-                path: '/admin/imesSystem',
+                path: '#',
             },
         ],
     },
@@ -149,12 +154,12 @@ export const adminMenuSections: AdminMenuSection[] = [
             {
                 labelKey: 'accessManagement',
                 icon: ShieldCheck,
-                path: '/admin/access',
+                path: '#',
             },
             {
                 labelKey: 'systemMonitoring',
                 icon: Activity,
-                path: '/admin/monitoring',
+                path: '#',
             }
         ],
     },

@@ -4,9 +4,11 @@ import { adminStyles } from "../../utils/styles";
 import type { DashboardData } from "../../types/warehouseDashboard";
 import { initialData } from "../../data/warehouseDashboard";
 import { DashboardStats, ImportExportChart, NetFlowChart, ProductionOverview } from "../../components/admin/dashboard";
+import { useTranslation } from "react-i18next";
 
 export default function AdminDashboard() {
   const [data] = useState<DashboardData>(initialData);
+  const [t] = useTranslation('dashboard');
 
   const { summary, monthlyMovement, netFlow, defectiveStock, brands } = data;
 
@@ -18,7 +20,7 @@ export default function AdminDashboard() {
             Dashboard
           </h1>
           <p className={`mt-2 text-sm ${adminStyles.mutedText}`}>
-            Cung cấp số liệu tổng quan về các chỉ số chính, bao gồm thống kê và hoạt động nhập/xuất kho và các hoạt động khác.
+            {t('description')}
           </p>
         </div>
       </div>

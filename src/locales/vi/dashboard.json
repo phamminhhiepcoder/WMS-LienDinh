@@ -1,0 +1,48 @@
+{
+    "description": "Cung cấp số liệu tổng quan về các chỉ số chính, bao gồm thống kê và hoạt động nhập/xuất kho và các hoạt động khác",
+    "stats": {
+        "totalImport": "Tổng số lượng nhập",
+        "totalExport": "Tổng số lượng xuất",
+        "currentStock": "Tổng tồn kho",
+        "inventoryTurnover": "Vòng quay tồn kho",
+        "products": "sản phẩm",
+        "turns": "vòng",
+        "comparedToLastMonth": "So với tháng trước",
+        "difference": "Chênh lệch"
+    },
+    "importExport": {
+        "title": "Tổng quan nhập/xuất kho",
+        "description": "So sánh số lượng hàng nhập và xuất theo từng tháng",
+        "unit": "Đơn vị: sản phẩm",
+        "import": "Nhập kho",
+        "export": "Xuất kho"
+    },
+    "netFlow": {
+        "title": "Dòng hàng ròng",
+        "description": "Chênh lệch giữa số lượng nhập và xuất theo tháng",
+        "seriesName": "Hàng ròng",
+        "total": "Tổng dòng hàng ròng trong kỳ",
+        "products": "sản phẩm"
+    },
+    "defectiveStock": {
+        "title": "Tổng quan tồn kho hàng lỗi",
+        "description": "Tỷ trọng hàng lỗi so với tổng số lượng tồn kho",
+        "defective": "Hàng lỗi",
+        "quantity": "Số lượng hàng lỗi",
+        "rate": "Tỷ lệ hàng lỗi"
+    },
+    "production": {
+        "title": "Tổng quan sản lượng thành phẩm",
+        "description": "Theo dõi sản lượng theo nhãn hàng và thời gian",
+        "timeRanges": {
+            "7d": "7 ngày",
+            "30d": "30 ngày",
+            "3m": "3 tháng"
+        },
+        "viewingChart": "Đang xem biểu đồ",
+        "chartTitle": "Sản lượng theo thời gian",
+        "selectedBrand": "Nhãn hàng đang chọn: {{brand}}",
+        "unit": "Đơn vị: sản phẩm",
+        "quantity": "Sản lượng"
+    }
+}

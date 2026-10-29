@@ -35,7 +35,7 @@
     "administration": "Quản trị",
     "userManagement": "Quản lý người dùng",
     "settings": "Cài đặt hệ thống",
-    "search": "Tìm kiếm...",
+    "search": "Tìm kiếm..",
     "profile": "Hồ sơ cá nhân",
     "logout": "Đăng xuất",
     "language": "Ngôn ngữ",
@@ -49,10 +49,10 @@
     "delete": "Xóa",
     "save": "Lưu",
     "cancel": "Hủy",
-    "loading": "Đang tải...",
+    "loading": "Đang tải..",
     "noData": "Không có dữ liệu",
     "toolbar": {
-        "searchPlaceholder": "Tìm kiếm...",
+        "searchPlaceholder": "Tìm kiếm..",
         "add": "Thêm mới",
         "clearSearch": "Xóa nội dung tìm kiếm"
     },

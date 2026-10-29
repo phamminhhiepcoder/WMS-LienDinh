@@ -179,7 +179,7 @@ export default function Login() {
                 </label>
 
                 <Link
-                  to="/forgot-password"
+                  to="#"
                   className="text-xs font-bold text-purple-600 transition-colors hover:text-purple-700 hover:underline"
                 >
                   Quên mật khẩu?
